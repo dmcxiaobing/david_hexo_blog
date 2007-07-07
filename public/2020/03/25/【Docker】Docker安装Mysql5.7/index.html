@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="David的博客 |  David&#39;s Blog">
+    <meta name="keyword" content="程序员小冰 David&#39;s Blog">
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+
+    <title>
+        
+        【Docker】Docker安装Mysql5.7 - David 的博客 | David&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/aircloud.css">
+    <link rel="stylesheet" href="/blog/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> David Blog </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/blog/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>David</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/blog/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-拉取mysql镜像，采用网易加速地址"><span class="toc-text">1 拉取mysql镜像，采用网易加速地址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-重命名镜像名"><span class="toc-text">2 重命名镜像名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-创建容器且安装镜像-启动。"><span class="toc-text">3 创建容器且安装镜像.启动。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-通过命令进入mysql-main容器"><span class="toc-text">4 通过命令进入mysql-main容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-然后进入MySQL。并设置远程的授权等信息。"><span class="toc-text">5 然后进入MySQL。并设置远程的授权等信息。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-取消Mysql查询大小写的问题。"><span class="toc-text">6 取消Mysql查询大小写的问题。</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#进入docker的MySQL容器，编辑-etc-mysql-mysql-conf-d-mysqld-cnf文件，在-mysqld-下添加如下："><span class="toc-text">进入docker的MySQL容器，编辑/etc/mysql/mysql.conf.d/mysqld.cnf文件，在[mysqld]下添加如下：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#保存，退出容器；执行sudo-docker-restart-MySQL-，重启MySQL即可查看。"><span class="toc-text">保存，退出容器；执行sudo docker restart MySQL ，重启MySQL即可查看。</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-解决Mysql5-7的查询兼容问题。此设置重启失效。"><span class="toc-text">7 解决Mysql5.7的查询兼容问题。此设置重启失效。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-解决Mysql5-7的密码修改不兼容问题。"><span class="toc-text">8 解决Mysql5.7的密码修改不兼容问题。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#备注："><span class="toc-text">备注：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#启动docker中-MySQL的时候可以加参数。含义是："><span class="toc-text">启动docker中 MySQL的时候可以加参数。含义是：</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> David Blog </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【Docker】Docker安装Mysql5.7
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-25 09:08:49</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/blog/tags/#Docker" title="Docker">Docker</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h5 id="1-拉取mysql镜像，采用网易加速地址"><a href="#1-拉取mysql镜像，采用网易加速地址" class="headerlink" title="1 拉取mysql镜像，采用网易加速地址"></a>1 拉取mysql镜像，采用网易加速地址</h5><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull hub.c<span class="number">.163</span>.com<span class="regexp">/library/</span><span class="string">mysql:</span><span class="number">5.7</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-重命名镜像名"><a href="#2-重命名镜像名" class="headerlink" title="2 重命名镜像名"></a>2 重命名镜像名</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">tag</span> hub.<span class="keyword">c</span>.<span class="number">163</span>.<span class="keyword">com</span>/library/mysq<span class="variable">l:5</span>.<span class="number">7</span> mysq<span class="variable">l:5</span>.<span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-创建容器且安装镜像-启动。"><a href="#3-创建容器且安装镜像-启动。" class="headerlink" title="3 创建容器且安装镜像.启动。"></a>3 创建容器且安装镜像.启动。</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> --name mysql-main -p3306:3306 -e <span class="attribute">MYSQL_ROOT_PASSWORD</span>=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-name:容器名称mysql-main</span></span><br><span class="line"><span class="deletion">-p：将端口号映射到主机</span></span><br><span class="line">最后设置密码123456</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-通过命令进入mysql-main容器"><a href="#4-通过命令进入mysql-main容器" class="headerlink" title="4 通过命令进入mysql-main容器"></a>4 通过命令进入mysql-main容器</h5><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -<span class="keyword">it</span> mysql-main bash</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-然后进入MySQL。并设置远程的授权等信息。"><a href="#5-然后进入MySQL。并设置远程的授权等信息。" class="headerlink" title="5 然后进入MySQL。并设置远程的授权等信息。"></a>5 然后进入MySQL。并设置远程的授权等信息。</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br><span class="line"></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> root@<span class="string">"%"</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">"123456"</span> <span class="keyword">with</span> <span class="keyword">grant</span> <span class="keyword">option</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">WITH</span> mysql_native_password <span class="keyword">BY</span> <span class="string">'123456'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-取消Mysql查询大小写的问题。"><a href="#6-取消Mysql查询大小写的问题。" class="headerlink" title="6 取消Mysql查询大小写的问题。"></a>6 取消Mysql查询大小写的问题。</h5><h6 id="进入docker的MySQL容器，编辑-etc-mysql-mysql-conf-d-mysqld-cnf文件，在-mysqld-下添加如下："><a href="#进入docker的MySQL容器，编辑-etc-mysql-mysql-conf-d-mysqld-cnf文件，在-mysqld-下添加如下：" class="headerlink" title="进入docker的MySQL容器，编辑/etc/mysql/mysql.conf.d/mysqld.cnf文件，在[mysqld]下添加如下："></a>进入docker的MySQL容器，编辑/etc/mysql/mysql.conf.d/mysqld.cnf文件，在[mysqld]下添加如下：</h6><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysqld]</span> </span><br><span class="line"><span class="attr">lower_case_table_names</span>=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="保存，退出容器；执行sudo-docker-restart-MySQL-，重启MySQL即可查看。"><a href="#保存，退出容器；执行sudo-docker-restart-MySQL-，重启MySQL即可查看。" class="headerlink" title="保存，退出容器；执行sudo docker restart MySQL ，重启MySQL即可查看。"></a>保存，退出容器；执行sudo docker restart MySQL ，重启MySQL即可查看。</h6><h5 id="7-解决Mysql5-7的查询兼容问题。此设置重启失效。"><a href="#7-解决Mysql5-7的查询兼容问题。此设置重启失效。" class="headerlink" title="7 解决Mysql5.7的查询兼容问题。此设置重启失效。"></a>7 解决Mysql5.7的查询兼容问题。此设置重启失效。</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">如：Expression #1 of SELECT list is <span class="keyword">not</span> <span class="keyword">in</span><span class="built_in"> GROUP </span>BY clause <span class="keyword">and</span> contains nonaggregated column</span><br><span class="line">MySQL 5.7.5和up实现了对功能依赖的检测。如果启用了only_full_group_by SQL模式(在默认情况下是这样)，那么MySQL就会拒绝选择列表、条件或顺序列表引用的查询，这些查询将引用组中未命名的非聚合列，而不是在功能上依赖于它们。(在5.7.5之前，MySQL没有检测到功能依赖项，only_full_group_by在默认情况下是不启用的。</span><br><span class="line"></span><br><span class="line">解决方案1：</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">set</span> global <span class="attribute">sql_mode</span>=<span class="string">'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span>;</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">set</span> session <span class="attribute">sql_mode</span>=<span class="string">'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">解决方案2（写配置文件，重启不失效。去除NO_ZERO_IN_DATE,NO_ZERO_DATE，解决时间戳的问题）：</span><br><span class="line"></span><br><span class="line">进入docker的MySQL容器，编辑/etc/mysql/mysql.conf.d/mysqld.cnf文件，在[mysqld]下添加如下：</span><br><span class="line"></span><br><span class="line"><span class="attribute">sql-mode</span>=<span class="string">'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="8-解决Mysql5-7的密码修改不兼容问题。"><a href="#8-解决Mysql5-7的密码修改不兼容问题。" class="headerlink" title="8 解决Mysql5.7的密码修改不兼容问题。"></a>8 解决Mysql5.7的密码修改不兼容问题。</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Mysql5.7更改密码，以前的方式会报错。代码如下：</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> mysql.user  <span class="keyword">set</span> <span class="keyword">password</span>=<span class="keyword">password</span>(<span class="string">'root'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'root'</span></span><br><span class="line"></span><br><span class="line">提示<span class="keyword">ERROR</span> <span class="number">1054</span> (<span class="number">42</span>S22): <span class="literal">Unknown</span> <span class="keyword">column</span> <span class="string">'password'</span> <span class="keyword">in</span> <span class="string">'field list'</span></span><br><span class="line"></span><br><span class="line">最新的更改密码代码是：</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> authentication_string=<span class="keyword">password</span>(<span class="string">'root'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'root'</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h5><h6 id="启动docker中-MySQL的时候可以加参数。含义是："><a href="#启动docker中-MySQL的时候可以加参数。含义是：" class="headerlink" title="启动docker中 MySQL的时候可以加参数。含义是："></a>启动docker中 MySQL的时候可以加参数。含义是：</h6><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--restart=always 跟随docker启动</span><br><span class="line">--privileged=true 容器root用户享有主机root用户权限</span><br><span class="line">-v 映射主机路径到容器</span><br><span class="line">-e MYSQL<span class="emphasis">_ROOT_</span>PASSWORD=root 设置root用户密码</span><br><span class="line">-d 后台启动</span><br><span class="line">--lower<span class="emphasis">_case_</span>table<span class="emphasis">_names=1 设置表名参数名等忽略大小写</span></span><br><span class="line"><span class="emphasis">---------------------</span></span><br></pre></td></tr></table></figure>
+
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/blog/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="https://www.facebook.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-facebook"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://segmentfault.com/u/mcxiaobing">思否</a></span>
+        <span>/</span>
+        
+        <span><a href="https://juejin.im/user/57edcdb2a0bb9f0058ed8ed9">掘金</a></span>
+        <span>/</span>
+        
+        <span><a href="https://www.jianshu.com/u/4e2015c5a972">简书</a></span>
+        <span>/</span>
+        
+        <span><a href="https://gitee.com/mcxiaobing">码云</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/blog/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/blog/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

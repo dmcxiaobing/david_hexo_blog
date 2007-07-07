@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="David的博客 |  David&#39;s Blog">
+    <meta name="keyword" content="程序员小冰 David&#39;s Blog">
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+
+    <title>
+        
+        【Docker】Docker入门之Centos(Linux)下安装docker，并运行hello-world - David 的博客 | David&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/aircloud.css">
+    <link rel="stylesheet" href="/blog/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> David Blog </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/blog/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>David</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/blog/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#首先安装docker所需要的依赖库"><span class="toc-text">首先安装docker所需要的依赖库</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#首先使用Centos的yum命令，安装docker："><span class="toc-text">首先使用Centos的yum命令，安装docker：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#然后安装完成之后，可以使用docker或者docker-version命令查看"><span class="toc-text">然后安装完成之后，可以使用docker或者docker version命令查看</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#启动docker命令service-docker-start"><span class="toc-text">启动docker命令service docker start</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#然后可以拉取Hello-world镜像："><span class="toc-text">然后可以拉取Hello-world镜像：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#最后可以运行Hello-world镜像："><span class="toc-text">最后可以运行Hello-world镜像：</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> David Blog </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【Docker】Docker入门之Centos(Linux)下安装docker，并运行hello-world
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-25 09:08:49</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/blog/tags/#Docker" title="Docker">Docker</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h5 id="首先安装docker所需要的依赖库"><a href="#首先安装docker所需要的依赖库" class="headerlink" title="首先安装docker所需要的依赖库"></a>首先安装docker所需要的依赖库</h5><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install </span>-y cmake</span><br><span class="line">sudo yum <span class="keyword">install </span>-y  make</span><br><span class="line">sudo yum <span class="keyword">install </span>-y gcc</span><br><span class="line">sudo yum <span class="keyword">install </span>-y gcc-c++</span><br><span class="line">sudo yum <span class="keyword">install </span>-y <span class="keyword">bison</span></span><br><span class="line"><span class="keyword">sudo </span>yum <span class="keyword">install </span>-y ncurses</span><br><span class="line">sudo yum <span class="keyword">install </span>-y ncurses-devel</span><br></pre></td></tr></table></figure>
+
+<h6 id="首先使用Centos的yum命令，安装docker："><a href="#首先使用Centos的yum命令，安装docker：" class="headerlink" title="首先使用Centos的yum命令，安装docker："></a>首先使用Centos的yum命令，安装docker：</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
+
+<h6 id="然后安装完成之后，可以使用docker或者docker-version命令查看"><a href="#然后安装完成之后，可以使用docker或者docker-version命令查看" class="headerlink" title="然后安装完成之后，可以使用docker或者docker version命令查看"></a>然后安装完成之后，可以使用docker或者docker version命令查看</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker或者docker version</span><br></pre></td></tr></table></figure>
+
+<h6 id="启动docker命令service-docker-start"><a href="#启动docker命令service-docker-start" class="headerlink" title="启动docker命令service docker start"></a>启动docker命令service docker start</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker start</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost local]# service docker start</span><br><span class="line">Redirecting to /bin/systemctl start docker.service</span><br></pre></td></tr></table></figure>
+
+<h6 id="然后可以拉取Hello-world镜像："><a href="#然后可以拉取Hello-world镜像：" class="headerlink" title="然后可以拉取Hello-world镜像："></a>然后可以拉取Hello-world镜像：</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull hello-world</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost local]# docker pull hello-world</span><br><span class="line">Using default tag: latest</span><br><span class="line">Trying to pull repository docker.io/library/hello-world ... </span><br><span class="line">latest: Pulling from docker.io/library/hello-world</span><br><span class="line">9db2ca6ccae0: Pull complete </span><br><span class="line">Digest: sha256:569d44f69ebf4592ec3a63cbea6d9c7b6cccfd50890794fa169455179b399eb4</span><br><span class="line">Status: Downloaded newer image for docker.io/hello-world:latest</span><br></pre></td></tr></table></figure>
+
+<h6 id="最后可以运行Hello-world镜像："><a href="#最后可以运行Hello-world镜像：" class="headerlink" title="最后可以运行Hello-world镜像："></a>最后可以运行Hello-world镜像：</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost local]# docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line"></span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.</span><br><span class="line">    (amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image which runs the</span><br><span class="line">    executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, which sent it</span><br><span class="line">    to your terminal.</span><br><span class="line"></span><br><span class="line">To try something more ambitious, you can run an Ubuntu container with:</span><br><span class="line"><span class="meta"> $</span><span class="bash"> docker run -it ubuntu bash</span></span><br><span class="line"></span><br><span class="line">Share images, automate workflows, and more with a free Docker ID:</span><br><span class="line"> https://hub.docker.com/</span><br><span class="line"></span><br><span class="line">For more examples and ideas, visit:</span><br><span class="line"> https://docs.docker.com/engine/userguide/</span><br></pre></td></tr></table></figure>
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/blog/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="https://www.facebook.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-facebook"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://segmentfault.com/u/mcxiaobing">思否</a></span>
+        <span>/</span>
+        
+        <span><a href="https://juejin.im/user/57edcdb2a0bb9f0058ed8ed9">掘金</a></span>
+        <span>/</span>
+        
+        <span><a href="https://www.jianshu.com/u/4e2015c5a972">简书</a></span>
+        <span>/</span>
+        
+        <span><a href="https://gitee.com/mcxiaobing">码云</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/blog/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/blog/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

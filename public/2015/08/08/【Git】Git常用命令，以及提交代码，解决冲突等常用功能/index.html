@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="David的博客 |  David&#39;s Blog">
+    <meta name="keyword" content="程序员小冰 David&#39;s Blog">
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+
+    <title>
+        
+        【Git】Git常用命令，以及提交代码，解决冲突等常用功能 - David 的博客 | David&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/aircloud.css">
+    <link rel="stylesheet" href="/blog/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> David Blog </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/blog/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>David</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/blog/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-首先下载Git，下载地址：https-git-scm-com"><span class="toc-text">1 首先下载Git，下载地址：https://git-scm.com</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-安装好之后，可以使用git命令，在终端中查看是否成功"><span class="toc-text">2 安装好之后，可以使用git命令，在终端中查看是否成功</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-配置和GitHub、gitee等平台的公钥和私钥。"><span class="toc-text">3 配置和GitHub、gitee等平台的公钥和私钥。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-此时就可以使用ssh下载我们的项目了，也就是有两种方式下载项目如下："><span class="toc-text">4 此时就可以使用ssh下载我们的项目了，也就是有两种方式下载项目如下：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常用命令介绍"><span class="toc-text">常用命令介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#当配置完成ssh之后，监测是否成功命令："><span class="toc-text">当配置完成ssh之后，监测是否成功命令：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#git-clone下载代码，指定分支。默认是从master分支下载"><span class="toc-text">git clone下载代码，指定分支。默认是从master分支下载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看所有的远程库。关联此项目的"><span class="toc-text">查看所有的远程库。关联此项目的</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#团队发中，前提fork了一份代码之后，后续提交，合并，解决冲突"><span class="toc-text">团队发中，前提fork了一份代码之后，后续提交，合并，解决冲突</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-拉取自己用户目录的项目到本地"><span class="toc-text">1 拉取自己用户目录的项目到本地</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-在本地项目加入主库的地址"><span class="toc-text">2 在本地项目加入主库的地址</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-拉取主库的最新代码。更新主库代码到本地。-master-代表：分支名称。"><span class="toc-text">3 拉取主库的最新代码。更新主库代码到本地。  master 代表：分支名称。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-提交代码。"><span class="toc-text">4 提交代码。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-从自己项目库下载项目后，更新主库项目到本地仓库。然后将主库项目更新的文件，提交到自己项目库下，然后再开发，最后提交自己文件到自己库下，最后合并到主库中。如果使用开发工具，可以直接commit-and-push…"><span class="toc-text">5 从自己项目库下载项目后，更新主库项目到本地仓库。然后将主库项目更新的文件，提交到自己项目库下，然后再开发，最后提交自己文件到自己库下，最后合并到主库中。如果使用开发工具，可以直接commit and push….</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#6-如果从主库更新下来，有冲突，则可以解决冲突后，commit-push，并合并到主库项目中。解决冲突可使用开发工具或者记事本等工具。"><span class="toc-text">6 如果从主库更新下来，有冲突，则可以解决冲突后，commit push，并合并到主库项目中。解决冲突可使用开发工具或者记事本等工具。</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> David Blog </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【Git】Git常用命令，以及提交代码，解决冲突等常用功能
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2015-08-08 11:11:11</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/blog/tags/#Git" title="Git">Git</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h5 id="1-首先下载Git，下载地址：https-git-scm-com"><a href="#1-首先下载Git，下载地址：https-git-scm-com" class="headerlink" title="1 首先下载Git，下载地址：https://git-scm.com"></a>1 首先下载Git，下载地址：<a href="https://git-scm.com" target="_blank" rel="noopener">https://git-scm.com</a></h5><h5 id="2-安装好之后，可以使用git命令，在终端中查看是否成功"><a href="#2-安装好之后，可以使用git命令，在终端中查看是否成功" class="headerlink" title="2 安装好之后，可以使用git命令，在终端中查看是否成功"></a>2 安装好之后，可以使用git命令，在终端中查看是否成功</h5><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[david@<span class="symbol">DavidMacbookPro</span> ~]# git</span><br><span class="line">usage: git [--version] [--help] [-c name=value]</span><br><span class="line">           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]</span><br><span class="line">           [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]</span><br><span class="line">           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]</span><br><span class="line">           &lt;command&gt; [&lt;args&gt;]</span><br><span class="line"></span><br><span class="line">最常用的 git 命令有：</span><br><span class="line">   add        添加文件内容至索引</span><br><span class="line">   bisect     通过二分查找定位引入 bug 的变更</span><br><span class="line">   branch     列出、创建或删除分支</span><br><span class="line">   checkout   检出一个分支或路径到工作区</span><br><span class="line">   clone      克隆一个版本库到一个新目录</span><br><span class="line">   commit     记录变更到版本库</span><br><span class="line">   diff       显示提交之间、提交和工作区之间等的差异</span><br><span class="line">   fetch      从另外一个版本库下载对象和引用</span><br><span class="line">   grep       输出和模式匹配的行</span><br><span class="line">   init       创建一个空的 <span class="symbol">Git</span> 版本库或重新初始化一个已存在的版本库</span><br><span class="line">   log        显示提交日志</span><br><span class="line">   merge      合并两个或更多开发历史</span><br><span class="line">   mv         移动或重命名一个文件、目录或符号链接</span><br><span class="line">   pull       获取并合并另外的版本库或一个本地分支</span><br><span class="line">   push       更新远程引用和相关的对象</span><br><span class="line">   rebase     本地提交转移至更新后的上游分支中</span><br><span class="line">   reset      重置当前<span class="symbol">HEAD</span>到指定状态</span><br><span class="line">   rm         从工作区和索引中删除文件</span><br><span class="line">   show       显示各种类型的对象</span><br><span class="line">   status     显示工作区状态</span><br><span class="line">   tag        创建、列出、删除或校验一个<span class="symbol">GPG</span>签名的 tag 对象</span><br><span class="line"></span><br><span class="line">命令 <span class="string">'git help -a'</span> 和 <span class="string">'git help -g'</span> 显示可用的子命令和一些指南。参见</span><br><span class="line"><span class="string">'git help &lt;命令&gt;'</span> 或 <span class="string">'git help &lt;指南&gt;'</span> 来查看给定的子命令帮助或指南。</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-配置和GitHub、gitee等平台的公钥和私钥。"><a href="#3-配置和GitHub、gitee等平台的公钥和私钥。" class="headerlink" title="3 配置和GitHub、gitee等平台的公钥和私钥。"></a>3 配置和GitHub、gitee等平台的公钥和私钥。</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 1 检查一下用户名和邮箱是否配置（github支持我们用用户名或邮箱登录）：</span></span><br><span class="line">git<span class="built_in"> config </span>--global  --list </span><br><span class="line"></span><br><span class="line">bogon:david david$ git<span class="built_in"> config </span>--global  --list </span><br><span class="line">user.<span class="attribute">name</span>=david</span><br><span class="line">user.<span class="attribute">email</span>=986945193@qq.com</span><br><span class="line">filter.lfs.<span class="attribute">clean</span>=git-lfs clean -- %f</span><br><span class="line">filter.lfs.<span class="attribute">smudge</span>=git-lfs smudge -- %f</span><br><span class="line">filter.lfs.<span class="attribute">process</span>=git-lfs filter-process</span><br><span class="line">filter.lfs.<span class="attribute">required</span>=<span class="literal">true</span></span><br><span class="line">core.<span class="attribute">autocrlf</span>=input</span><br><span class="line">credential.<span class="attribute">helper</span>=store</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 2 配置我们的用户名和密码</span></span><br><span class="line">git<span class="built_in"> config </span>--global  user.name <span class="string">"这里换上你的用户名"</span></span><br><span class="line">git<span class="built_in"> config </span>--global  user.email <span class="string">"这里换上你的邮箱"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## <span class="number">3</span> 生成秘钥，此时，我们可以一直点回车，主要是为了提示生成文件位置，以及配置密码：</span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"这里换上你的邮箱"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 4 可以看到在自己用户目录下，生成了私钥和公钥。此时，可以将公钥内容，复制到GitHub等系统后台。</span></span><br><span class="line">bogon:david david$ ls ~/.ssh/</span><br><span class="line">git<span class="built_in"> config </span>--global  user.name <span class="string">"david"</span></span><br><span class="line">id_rsa</span><br><span class="line">id_rsa.pub</span><br><span class="line">known_hosts</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 5 id_rsa.pub公钥内容类似如下</span></span><br><span class="line"></span><br><span class="line">ssh-rsa DDDDDDDDC1yc2EAAAADAQABAAABAQDHlYIVVrGI<span class="regexp">/xjKEjUnKVlW2JMO4kvJjpQJhKnVoM60+XapMC8gORUvvgaQqi5DMZOOf0qglrDYjwhkztFkZsSJIeBIeNIZFfSaI3Z9UKxl7PxA9JrzOBUgLMsFx4ITOdQMC/</span>DDDDD4Qdz5AGI+DbjOGD3p8pciwTr9oyZ9Atli33y6TURg0Xc1YTve9h97ibc3jOHMfo+Zw0MwxFhr50FOUg5u5hjDM0X4<span class="regexp">/G8sbBB4Uujn4FKY6Qss+seAl2/m</span>hol6qj0mQ9R+I0z3V1Lf2E4aoTBDtaDRNgSuGsW7pHlMFur<span class="regexp">/ra/</span>BIIyhqJcSjxCrLdmBpZvOo<span class="regexp">/6s0nYjdWrDDDDD 986945193@qq.com</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="4-此时就可以使用ssh下载我们的项目了，也就是有两种方式下载项目如下："><a href="#4-此时就可以使用ssh下载我们的项目了，也就是有两种方式下载项目如下：" class="headerlink" title="4 此时就可以使用ssh下载我们的项目了，也就是有两种方式下载项目如下："></a>4 此时就可以使用ssh下载我们的项目了，也就是有两种方式下载项目如下：</h5><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@<span class="number">192.168</span>.<span class="number">1.188</span>:david/david_github_demo.git</span><br><span class="line"></span><br><span class="line">git <span class="keyword">clone</span> <span class="title">http</span>://<span class="number">192.168</span>.<span class="number">1.105</span>:<span class="number">8888</span>/david/david.git</span><br></pre></td></tr></table></figure>
+
+<h5 id="常用命令介绍"><a href="#常用命令介绍" class="headerlink" title="常用命令介绍"></a>常用命令介绍</h5><h6 id="当配置完成ssh之后，监测是否成功命令："><a href="#当配置完成ssh之后，监测是否成功命令：" class="headerlink" title="当配置完成ssh之后，监测是否成功命令："></a>当配置完成ssh之后，监测是否成功命令：</h6><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ssh</span> <span class="selector-tag">-T</span> <span class="selector-tag">git</span>@<span class="keyword">192</span>.<span class="keyword">168</span>.<span class="keyword">1</span>.<span class="keyword">188</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="git-clone下载代码，指定分支。默认是从master分支下载"><a href="#git-clone下载代码，指定分支。默认是从master分支下载" class="headerlink" title="git clone下载代码，指定分支。默认是从master分支下载"></a>git clone下载代码，指定分支。默认是从master分支下载</h6><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## 其中dev_0<span class="meta">.0</span><span class="meta">.1</span> 代表分支名称</span><br><span class="line">git clone -b dev_0<span class="meta">.0</span><span class="meta">.1</span> git@<span class="number">192.168</span><span class="meta">.1</span><span class="meta">.188</span>:david/david_demo.git</span><br></pre></td></tr></table></figure>
+
+<h6 id="查看所有的远程库。关联此项目的"><a href="#查看所有的远程库。关联此项目的" class="headerlink" title="查看所有的远程库。关联此项目的"></a>查看所有的远程库。关联此项目的</h6><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git remote -v</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="团队发中，前提fork了一份代码之后，后续提交，合并，解决冲突"><a href="#团队发中，前提fork了一份代码之后，后续提交，合并，解决冲突" class="headerlink" title="团队发中，前提fork了一份代码之后，后续提交，合并，解决冲突"></a>团队发中，前提fork了一份代码之后，后续提交，合并，解决冲突</h3><h6 id="1-拉取自己用户目录的项目到本地"><a href="#1-拉取自己用户目录的项目到本地" class="headerlink" title="1 拉取自己用户目录的项目到本地"></a>1 拉取自己用户目录的项目到本地</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> <span class="string">'本用户目录下的项目地址'</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="2-在本地项目加入主库的地址"><a href="#2-在本地项目加入主库的地址" class="headerlink" title="2 在本地项目加入主库的地址"></a>2 在本地项目加入主库的地址</h6><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="keyword">add</span><span class="bash"> main <span class="string">'主库地址'</span></span></span><br></pre></td></tr></table></figure>
+
+<h6 id="3-拉取主库的最新代码。更新主库代码到本地。-master-代表：分支名称。"><a href="#3-拉取主库的最新代码。更新主库代码到本地。-master-代表：分支名称。" class="headerlink" title="3 拉取主库的最新代码。更新主库代码到本地。  master 代表：分支名称。"></a>3 拉取主库的最新代码。更新主库代码到本地。  master 代表：分支名称。</h6><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull main <span class="literal">master</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="4-提交代码。"><a href="#4-提交代码。" class="headerlink" title="4 提交代码。"></a>4 提交代码。</h6><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## 添加当前目录下文件</span><br><span class="line"> git add .</span><br><span class="line">## 提交到本地仓库</span><br><span class="line"> git commit -m <span class="string">''</span></span><br><span class="line">## 推送到远端仓库 </span><br><span class="line"> git push</span><br></pre></td></tr></table></figure>
+
+<h6 id="5-从自己项目库下载项目后，更新主库项目到本地仓库。然后将主库项目更新的文件，提交到自己项目库下，然后再开发，最后提交自己文件到自己库下，最后合并到主库中。如果使用开发工具，可以直接commit-and-push…"><a href="#5-从自己项目库下载项目后，更新主库项目到本地仓库。然后将主库项目更新的文件，提交到自己项目库下，然后再开发，最后提交自己文件到自己库下，最后合并到主库中。如果使用开发工具，可以直接commit-and-push…" class="headerlink" title="5 从自己项目库下载项目后，更新主库项目到本地仓库。然后将主库项目更新的文件，提交到自己项目库下，然后再开发，最后提交自己文件到自己库下，最后合并到主库中。如果使用开发工具，可以直接commit and push…."></a>5 从自己项目库下载项目后，更新主库项目到本地仓库。然后将主库项目更新的文件，提交到自己项目库下，然后再开发，最后提交自己文件到自己库下，最后合并到主库中。如果使用开发工具，可以直接commit and push….</h6><h6 id="6-如果从主库更新下来，有冲突，则可以解决冲突后，commit-push，并合并到主库项目中。解决冲突可使用开发工具或者记事本等工具。"><a href="#6-如果从主库更新下来，有冲突，则可以解决冲突后，commit-push，并合并到主库项目中。解决冲突可使用开发工具或者记事本等工具。" class="headerlink" title="6 如果从主库更新下来，有冲突，则可以解决冲突后，commit push，并合并到主库项目中。解决冲突可使用开发工具或者记事本等工具。"></a>6 如果从主库更新下来，有冲突，则可以解决冲突后，commit push，并合并到主库项目中。解决冲突可使用开发工具或者记事本等工具。</h6>
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/blog/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="https://www.facebook.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-facebook"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://segmentfault.com/u/mcxiaobing">思否</a></span>
+        <span>/</span>
+        
+        <span><a href="https://juejin.im/user/57edcdb2a0bb9f0058ed8ed9">掘金</a></span>
+        <span>/</span>
+        
+        <span><a href="https://www.jianshu.com/u/4e2015c5a972">简书</a></span>
+        <span>/</span>
+        
+        <span><a href="https://gitee.com/mcxiaobing">码云</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/blog/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/blog/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

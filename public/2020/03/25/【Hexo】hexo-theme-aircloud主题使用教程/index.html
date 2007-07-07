@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="David的博客 |  David&#39;s Blog">
+    <meta name="keyword" content="程序员小冰 David&#39;s Blog">
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+
+    <title>
+        
+        【Hexo】hexo-theme-aircloud主题使用教程 - David 的博客 | David&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/aircloud.css">
+    <link rel="stylesheet" href="/blog/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> David Blog </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/blog/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>David</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/blog/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo-Theme-AirCloud-一个简洁轻量的-hexo-博客主题"><span class="toc-text">Hexo-Theme-AirCloud: 一个简洁轻量的 hexo 博客主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#功能简介"><span class="toc-text">功能简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#起步"><span class="toc-text">起步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#功能适配"><span class="toc-text">功能适配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索功能"><span class="toc-text">搜索功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标签页面-amp-关于页面"><span class="toc-text">标签页面 &amp; 关于页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评论功能"><span class="toc-text">评论功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gitment"><span class="toc-text">gitment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#disqus"><span class="toc-text">disqus</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LiveRe"><span class="toc-text">LiveRe</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#favicon-的配置"><span class="toc-text">favicon 的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#底部自定义"><span class="toc-text">底部自定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高级自定义"><span class="toc-text">高级自定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#首行缩进"><span class="toc-text">首行缩进</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#头像圆角"><span class="toc-text">头像圆角</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何取消赞赏功能？"><span class="toc-text">如何取消赞赏功能？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些注意事项"><span class="toc-text">一些注意事项</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> David Blog </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【Hexo】hexo-theme-aircloud主题使用教程
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-25 09:08:49</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/blog/tags/#Hexo" title="Hexo">Hexo</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="Hexo-Theme-AirCloud-一个简洁轻量的-hexo-博客主题"><a href="#Hexo-Theme-AirCloud-一个简洁轻量的-hexo-博客主题" class="headerlink" title="Hexo-Theme-AirCloud: 一个简洁轻量的 hexo 博客主题"></a>Hexo-Theme-AirCloud: 一个简洁轻量的 hexo 博客主题</h2><blockquote>
+<p><a href="./readme-en.md">English Document</a> | <a href="http://niexiaotao.cn/" target="_blank" rel="noopener">预览地址</a></p>
+</blockquote>
+<h2 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h2><p>Hexo-Theme-AirCloud 是一个简洁轻量的 hexo 博客主题，旨在将中心放在博文本身，因此：</p>
+<ul>
+<li>默认没有大范围的主题色块、图片铺排等，也不要求每片博文配图，一方面这并不是我们记录知识的重点，另外一方面可能程序员群体并没有足够的素材，容易造成主题纠纷。</li>
+<li>建议通过不冗余的内容进行传达，比如默认没有博文摘要，因为不少开发者写博客的时候没有写博文摘要，如果从博客前一部分截取往往不能表达完整思想。</li>
+</ul>
+<p>另外，该主题主要实现的功能有:</p>
+<ul>
+<li>全局搜索功能，并对搜索内容进行高亮。</li>
+<li>博客评论功能，目前接入 <a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">gitment</a>，之后考虑接入多种可选。</li>
+<li>文章详情页文章目录功能</li>
+<li>访问量统计（总体UV、PV，单页PV）</li>
+<li>语言切换能力，目前支持中文和英文</li>
+</ul>
+<h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><blockquote>
+<p>我在”常见问题”中总结了该项目之前被提及的一些问题，如果你在使用过程中遇到了问题，可以在”常见问题”中寻找答案，如果没能解决，欢迎提<a href="https://github.com/aircloud/hexo-theme-aircloud/issues" target="_blank" rel="noopener">issue</a>，我会保证回复。</p>
+</blockquote>
+<p>注意，如果你不按照”功能适配”部分的内容进行操作，可能会导致相关提及的功能无法正常使用。</p>
+<ul>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8" target="_blank" rel="noopener">基本使用</a></li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E5%8A%9F%E8%83%BD%E9%80%82%E9%85%8D" target="_blank" rel="noopener">功能适配</a><ul>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD" target="_blank" rel="noopener">搜索功能</a></li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%9D%A2--%E5%85%B3%E4%BA%8E%E9%A1%B5%E9%9D%A2" target="_blank" rel="noopener"><code>标签</code>页面 &amp; <code>关于</code>页面</a></li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD" target="_blank" rel="noopener">评论功能</a></li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%9D%A2--%E5%85%B3%E4%BA%8E%E9%A1%B5%E9%9D%A2" target="_blank" rel="noopener">favicon 的配置</a></li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E5%BA%95%E9%83%A8%E8%87%AA%E5%AE%9A%E4%B9%89" target="_blank" rel="noopener">底部自定义</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E9%A6%96%E8%A1%8C%E7%BC%A9%E8%BF%9B" target="_blank" rel="noopener">高级自定义</a><ul>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E9%A6%96%E8%A1%8C%E7%BC%A9%E8%BF%9B" target="_blank" rel="noopener">首行缩进</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">常见问题</a><ul>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E5%A6%82%E4%BD%95%E5%8F%96%E6%B6%88%E8%B5%9E%E8%B5%8F%E5%8A%9F%E8%83%BD" target="_blank" rel="noopener">如何取消赞赏功能？</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/aircloud/hexo-theme-aircloud#%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" target="_blank" rel="noopener">一些注意事项</a>    </li>
+</ul>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p><strong>建议：参考 <a href="https://github.com/aircloud/hexo-aircloud-blog" target="_blank" rel="noopener">DEMO</a> 进行配置，尤其是 _config.yml 部分，否则可能会造成功能缺失</strong></p>
+<p>同其他博客主题使用方式相同，直接 clone 或者下载本项目，复制粘贴到 themes 文件夹下即可。</p>
+<p>具体的 _config.yml 自定义配置，请参考<a href="https://github.com/aircloud/hexo-aircloud-blog" target="_blank" rel="noopener">DEMO</a>。</p>
+<h2 id="功能适配"><a href="#功能适配" class="headerlink" title="功能适配"></a>功能适配</h2><h3 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h3><p>为了使用搜索功能，首先需要安装下列插件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-generator-search --save</span><br></pre></td></tr></table></figure>
+
+<p>然后在 _config.yml 中进行配置，可以参考如下配置：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> search.json</span><br><span class="line"><span class="symbol">  field:</span> post</span><br></pre></td></tr></table></figure>
+
+<h3 id="标签页面-amp-关于页面"><a href="#标签页面-amp-关于页面" class="headerlink" title="标签页面 &amp; 关于页面"></a><code>标签</code>页面 &amp; <code>关于</code>页面</h3><p>如果是新项目，默认是没有<code>标签</code>页面和<code>关于</code>页面的，需要在<code>source</code>文件夹下建立<code>tags</code>文件夹和<code>about</code>文件夹。</p>
+<blockquote>
+<p>注：建议不要直接新建文件，而是采用 hexo 的 <code>hexo new page tags</code> 和 <code>hexo new page about</code> 的方式新建文件，这样可以被 hexo 索引到。</p>
+</blockquote>
+<p>其中<code>tags</code>文件夹中新建<code>index.md</code>并写入：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">"tags"</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">"Tags"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p><code>about</code>文件夹下<code>index.md</code>为一篇支持 markdown 格式的文件，需要在开头添加：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">"about"</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">"About"</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016</span><span class="bullet">-04</span><span class="bullet">-21</span> <span class="number">04</span><span class="string">:48:33</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">true</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h3><p>目前，本博客支持以下评论功能：</p>
+<ul>
+<li><a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">gitment</a>（gitment 经常会出现限频或者 404 等错误，其作者已关闭github认证转发服务）</li>
+<li><a href="https://disqus.com" target="_blank" rel="noopener">disqus</a> </li>
+<li><a href="https://www.livere.com" target="_blank" rel="noopener">LiveRe</a></li>
+</ul>
+<h4 id="gitment"><a href="#gitment" class="headerlink" title="gitment"></a>gitment</h4><p>建议先在<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">gitment</a>进行了解，然后参考<a href="https://github.com/aircloud/hexo-aircloud-blog" target="_blank" rel="noopener">DEMO</a>进行配置，其中一些相关项目如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">comment</span>:</span><br><span class="line">  <span class="attribute">type</span>: gitment</span><br><span class="line">  <span class="attribute">id</span>: <span class="attribute">your-id-created-by-https</span>:<span class="comment">//github.com/settings/applications/new</span></span><br><span class="line">  <span class="attribute">secret</span>: <span class="attribute">your-secret-created-by-https</span>:<span class="comment">//github.com/settings/applications/new</span></span><br><span class="line">  <span class="attribute">owner</span>: aircloud</span><br><span class="line">  <span class="attribute">repo</span>: hexo-aircloud-blog</span><br></pre></td></tr></table></figure>
+
+<h4 id="disqus"><a href="#disqus" class="headerlink" title="disqus"></a>disqus</h4><p>disqus 是一个使用比较广泛的评论系统，我们需要先在<a href="https://disqus.com" target="_blank" rel="noopener">官方网站</a>注册一个账号。</p>
+<p>登录后，点击首页的 GET STARTED 按钮，之后选择 I want to install Disqus on my site 选项，填写相关内容，值得注意的是，<code>Website Name</code> 需要全网唯一，而且，一般情况，假设你的 <code>Website Name</code> 填写的是 example，那么下文 <code>script</code> 字段就可以写 <code>&#39;https://example.disqus.com/embed.js&#39;</code>。</p>
+<p>当然，你也可以在下一步 -&gt; 选择 basic 免费套餐 -&gt; 选择最后的 “I don’t see my platform listed, installed manually with universal code” -&gt; 找到代码中的 <code>s.src = &#39;https://xxxx.disqus.com/embed.js&#39;;</code> , 从而找到 script 地址。(无需插入 disqus 给出的脚本，只需按照这里的说明配置即可)</p>
+<p>之后，你需要在 <code>_config.yml</code> 中配置如下内容：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commen<span class="variable">t:</span></span><br><span class="line">   <span class="built_in">type</span>: disqus</span><br><span class="line">   <span class="keyword">scrip</span><span class="variable">t:</span> <span class="string">'https://example.disqus.com/embed.js'</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，你也可以配置<code>url</code> 和 <code>identifier</code>， 但是这个就属于高级内容了，对于我们一般的 hexo 博客网站来说必要性不大，如果你需要配置这些内容，可能你已经是一个高级玩家了，可以在 <code>themes/aircloud/layout/layout.ejs</code> 的相关代码的基础上进行改动。</p>
+<blockquote>
+<p>注意: 目前，直接嵌入 disqus 的代码可能会加载失败，你也可以考虑将相关代码放在自己的博客下引入：在 public 文件夹下新建文件放入代码，跟随发布即可（放入 source 文件夹下可能会由于 hexo 的处理变得有错误），并同时更改 <code>_config.yml</code> 中的配置。</p>
+</blockquote>
+<h4 id="LiveRe"><a href="#LiveRe" class="headerlink" title="LiveRe"></a>LiveRe</h4><p>LiveRe 是一款来自韩国的支持中文且没有被墙LiveRe评论插件，重点是使用无需翻墙。</p>
+<p>该插件分为city和premium两个版本，其中city版是适合所有人使用的免费版本,有更高需求的可以考虑premium版本。</p>
+<p>注册之后，选择 安装 -&gt; 选 city版本，按提示操作进入到管理页面，系统会给出一段嵌入代码，找到其中的data-id和data-uid。</p>
+<p>之后，你需要在<code>_config.yml</code>中配置如下内容</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">comment</span>:</span><br><span class="line">   <span class="attribute">type</span>: livere</span><br><span class="line">   <span class="attribute">livere_id</span>: <span class="string">'city'</span></span><br><span class="line">   <span class="attribute">livere_uid</span>:</span><br></pre></td></tr></table></figure>
+
+<p><code>livere_id</code> 和 <code>livere_uid</code>就是注册后获得的 data-id和data-uid。</p>
+<h3 id="favicon-的配置"><a href="#favicon-的配置" class="headerlink" title="favicon 的配置"></a>favicon 的配置</h3><p>项目的 favicon 默认在你的博客根目录的 <code>/source/img</code> 下面，在 <code>/source/img</code> 下面添加 favicon.ico 即可，不要添加在主题文件夹内。</p>
+<h3 id="底部自定义"><a href="#底部自定义" class="headerlink" title="底部自定义"></a>底部自定义</h3><p>大家如果访问提供的预览链接，会发现我们的博客底部是提供一些内容的：一些社交平台的个人主页链接、友情链接、PV、UV 与 本模版链接。</p>
+<p>一般情况下，大家无需改动底部的代码，直接在 <code>_config.yml</code> 中配置即可。</p>
+<p>配置社交平台主页的样例代码：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># SNS settings</span></span><br><span class="line"><span class="meta"># 一些社交平台地址，支持以下几种：</span></span><br><span class="line"><span class="symbol">weibo_username:</span>     <span class="number">3286578617</span></span><br><span class="line"><span class="symbol">zhihu_username:</span>     ai-er-lan-xue-da</span><br><span class="line"><span class="symbol">github_username:</span>    AirCloud</span><br><span class="line"><span class="symbol">twitter_username:</span>   iconie_alloy</span><br><span class="line"><span class="symbol">facebook_username:</span>  xiaotao.nie<span class="number">.5</span></span><br><span class="line"><span class="symbol">linkedin_username:</span>  小涛-聂<span class="number">-80964</span>aba</span><br></pre></td></tr></table></figure>
+
+<p>如果不想包括某些社交平台，直接注释或删除相关代码即可（目前暂不支持在不改动模版代码的前提下新增社交平台）。</p>
+<p>配置友情链接的样例代码：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Friends</span></span><br><span class="line"><span class="meta"># 友情链接</span></span><br><span class="line"><span class="symbol">friends:</span> [</span><br><span class="line">    &#123;</span><br><span class="line"><span class="symbol">        title:</span> <span class="string">"10000H"</span>,</span><br><span class="line"><span class="symbol">        href:</span> <span class="string">"https://www.10000h.top"</span></span><br><span class="line">    &#125;,&#123;</span><br><span class="line"><span class="symbol">        title:</span> <span class="string">"Xiaotao's Page"</span>,</span><br><span class="line"><span class="symbol">        href:</span> <span class="string">"https://niexiaotao.com"</span></span><br><span class="line">    &#125;,&#123;</span><br><span class="line"><span class="symbol">        title:</span> <span class="string">"It helps SEO"</span>,</span><br><span class="line"><span class="symbol">        href:</span> <span class="string">"#"</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>最底部的 PV、UV 和模版地址，无需配置。</p>
+<h2 id="高级自定义"><a href="#高级自定义" class="headerlink" title="高级自定义"></a>高级自定义</h2><h3 id="首行缩进"><a href="#首行缩进" class="headerlink" title="首行缩进"></a>首行缩进</h3><p>目前可以配置是否在博客页面带有首行缩进两个汉字的效果，默认是有首行缩进的效果的，但是也可以通过下面的配置代码进行关闭：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">post_style:</span></span><br><span class="line"><span class="symbol">    indent:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="头像圆角"><a href="#头像圆角" class="headerlink" title="头像圆角"></a>头像圆角</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">avatar_style:</span></span><br><span class="line"><span class="attr">  radius:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="如何取消赞赏功能？"><a href="#如何取消赞赏功能？" class="headerlink" title="如何取消赞赏功能？"></a>如何取消赞赏功能？</h3><p>目前网站的赞赏功能做的比较鸡肋，缺乏一定的丰富度，如果你想取消这个功能，只需取消注释或者删除掉赞赏部分的相关配置即可：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">donate:</span><br><span class="line">  <span class="selector-tag">img</span>: img/donate.jpg</span><br><span class="line">  <span class="attribute">content</span>: 感谢鼓励</span><br></pre></td></tr></table></figure>
+
+<p>另外，如果你对赞赏部分有用户体验较好并且通用型比较好的设计，也可以提 issue，我会考虑实现。</p>
+<h2 id="一些注意事项"><a href="#一些注意事项" class="headerlink" title="一些注意事项"></a>一些注意事项</h2><p>由于一些hexo的历史遗留问题等，为了避免给用户在使用过程中带来太多麻烦(比如需要改动主题代码甚至hexo源码)，建议用户使用过程中遵循一些规范：</p>
+<ul>
+<li>文章不要有跳级目录，比如一个<code>###</code>三级目录下是一个<code>#####</code>五级目录，然后又有一个<code>###</code>三级目录，这样有可能导致 hexo 解析出错，从而影响文章目录部分的展示。</li>
+<li>文章的段落(p)都有默认的两个字符的首行缩进，虽然能识别 markdown 段落中的换行，但是无法对换行后的内容进行缩进，所以这里需要注意样式问题(如果需要多行缩进，建议使用多个段落或者做成列表)。</li>
+</ul>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/blog/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/mcxiaobing">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="https://www.facebook.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-facebook"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/qq986945193">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://segmentfault.com/u/mcxiaobing">思否</a></span>
+        <span>/</span>
+        
+        <span><a href="https://juejin.im/user/57edcdb2a0bb9f0058ed8ed9">掘金</a></span>
+        <span>/</span>
+        
+        <span><a href="https://www.jianshu.com/u/4e2015c5a972">简书</a></span>
+        <span>/</span>
+        
+        <span><a href="https://gitee.com/mcxiaobing">码云</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/blog/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/blog/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
